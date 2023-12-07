@@ -45,9 +45,54 @@ happy: 39%
 sad: 98%
 angry: 87%
 happy: 100%
-happy: 51%
+happy: 51%fear: 99%
+neutral: 100%
+fear: 80%
+fear: 86%
+fear: 35%fear: 96%
+neutral: 86%
+neutral: 81%
+neutral: 61%
+
+fear: 92%
+fear: 98%NEUTRAL: 91%
+HAPPY: 98%
+HAPPY: 97%
+ANGRY: 54%
+SURPRISE: 53%
+
+neutral: 53%
+neutral: 81%
+fear: 45%
+sad: 66%
+fear: 62%SURPRISE: 51%
+NEUTRAL: 95%
+NEUTRAL: 86%
+NEUTRAL: 95%
+ANGRY: 84%
+NEUTRAL: 98%
+NEUTRAL: 100%
+NEUTRAL: 97%NEUTRAL:
+ANGRY: 96%
+NEUTRAL: 100%
+NEUTRAL: 99%
+NEUTRAL: 98%
+NEUTRAL: 95%
+NEUTRAL: 89%
+ANGRY: 99%
+ANGRY: 94%
+NEUTRAL: 79%
+ANGRY: 91%
+HAPPY: 99%
+
+fear: 94%
+sad: 36%
+
 angry: 100%
 neutral: 72%
 neutral: 36%
 sad: 94%
+angry: 93%
 
+fear: 100%
+happy: 100%

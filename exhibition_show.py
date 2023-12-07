@@ -77,6 +77,7 @@ import queue
 import cv2
 import pyautogui
 from deepface import DeepFace
+from emotion_responses import responses
 
 class TypingEffectApp:
     def __init__(self, root, message_queue):
@@ -98,7 +99,11 @@ class TypingEffectApp:
         self.check_queue()
 
     def typing_effect(self, new_word, delay=0.1):
-        for char in new_word:
+        emotion = new_word.split(':')[0]
+        print(emotion)
+        to_type = self.convert_emotion_to_verbiage(emotion)
+        print(to_type)
+        for char in to_type:
             time.sleep(delay)
             self.display_text += char  # Append new characters to the existing text
             max_chars_per_line = self.canvas_width // 7
@@ -106,14 +111,24 @@ class TypingEffectApp:
             self.update_image(wrapped_text)  # Update display for each character
             self.root.update_idletasks()  # Force update of the Tkinter display
 
+    def convert_emotion_to_verbiage(self, emotion):
+        return responses.get(emotion.lower(), "")
+
     def update_image(self, lines):
         self.image = Image.new("RGB", (self.canvas_width, self.canvas_height), color=(255, 255, 255))
         self.draw = ImageDraw.Draw(self.image)
 
-        y_offset = 0
-        for line in lines:
+        max_chars_per_line = self.canvas_width // 7
+        max_lines_to_display = self.canvas_height // 15  # Number of lines that fit the canvas
+
+        if len(lines) > max_lines_to_display:
+            lines_to_display = lines[-max_lines_to_display:]  # Show the latest lines that fit the canvas
+        else:
+            lines_to_display = lines
+
+        for i, line in enumerate(lines_to_display):
+            y_offset = i * 15  # Approximate line height
             self.draw.text((10, y_offset), line, fill="black", font=self.font)
-            y_offset += 15  # Approximate line height
 
         tk_image = ImageTk.PhotoImage(self.image)
         self.image_label.config(image=tk_image)
