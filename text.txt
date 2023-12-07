@@ -1,0 +1,53 @@
+sad: 92.18%
+fear: 81.98%
+fear: 54.20%
+!GALLERY INPUT!:angry=67.48619079589844
+!GALLERY INPUT!:sad=43.92942190170288
+
+neutral: 96%
+happy: 50%
+angry: 69%
+fear: 56%surprise: 90%
+
+happy: 75%
+neutral: 67%
+surprise: 96%
+sad: 75%
+angry: 76%
+surprise: 97%
+neutral: 94%
+neutral: 88%
+surprise: 69%
+happy: 49%
+happy: 48%
+neutral: 59%
+fear: 82%
+neutral: 67%
+sad: 68%neutral: 100%
+fear: 33%
+happy: 97%
+happy: 92%
+fear: 80%
+neutral: 88%
+surprise: 94%
+fear: 99%
+fear: 95%
+angry: 82%
+angry: 80%
+neutral: 79%
+fear: 99%
+angry: 93%
+fear: 52%
+happy: 81%
+neutral: 100%
+happy: 71%
+happy: 39%
+sad: 98%
+angry: 87%
+happy: 100%
+happy: 51%
+angry: 100%
+neutral: 72%
+neutral: 36%
+sad: 94%
+
