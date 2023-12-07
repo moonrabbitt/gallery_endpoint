@@ -1,6 +1,6 @@
-from PIL import Image, ImageDraw, ImageFont
 import imageio
 import numpy as np
+from PIL import Image, ImageDraw, ImageFont
 
 # Define the GIF parameters
 width, height = 400, 100
@@ -25,7 +25,7 @@ for i in range(num_frames):
 
     # Add text (website and Instagram handle) with a larger font
     font = ImageFont.truetype("arial.ttf", font_size)
-    website_text = "avikapulges.com"
+    website_text = "Website: avikapulges.com"
     insta_text = "Instagram: avikaaa_p"
     text_color = (255, 255, 255)  # White
 
@@ -46,7 +46,7 @@ for i in range(num_frames):
 
     frames.append(background)
 
-# Save the frames as a GIF
-imageio.mimsave("avikapulges.gif", frames, duration=0.1)
+# Save the frames as a GIF with an infinite loop
+imageio.mimsave("avikapulges.gif", frames, duration=0.1, loop=0)
 
-print("GIF created successfully.")
+print("GIF created successfully with an infinite loop.")

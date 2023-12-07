@@ -25,6 +25,7 @@ def convert_deepface_emotions(deepface_emotion):
 import qrcode
 from PIL import Image
 from IPython.display import display
+import random
 
 
 def display_qr_code(link, image_path='phone.png', output_path='output.png'):
@@ -91,7 +92,7 @@ class TypingEffectApp:
 
         self.draw = ImageDraw.Draw(self.image)
 
-        self.image_label = tk.Label(root)
+        self.image_label = tk.Label(self.root)
         self.image_label.pack()
 
         self.message_queue = message_queue
@@ -101,8 +102,8 @@ class TypingEffectApp:
     def typing_effect(self, new_word, delay=0.1):
         emotion = new_word.split(':')[0]
         print(emotion)
-        to_type = self.convert_emotion_to_verbiage(emotion)
-        print(to_type)
+        to_type_list = self.convert_emotion_to_verbiage(emotion)
+        to_type = random.choice(to_type_list)
         for char in to_type:
             time.sleep(delay)
             self.display_text += char  # Append new characters to the existing text
@@ -198,12 +199,69 @@ def emotion_recognition_from_webcam(message_queue):
     video.release()
     cv2.destroyAllWindows()
 
-def main():
-    root = tk.Tk()
-    message_queue = queue.Queue()
-    app = TypingEffectApp(root, message_queue)
+from PIL import Image, ImageTk, ImageSequence
 
+class GifAnimationApp:
+    def __init__(self, root, gif_path):
+        self.root = root
+        self.root.title("LET'S KEEP IN CONTACT")
+
+        # Load the GIF frames
+        self.gif_frames = self.load_gif_frames(gif_path)
+        self.current_frame_index = 0
+
+        # Create a label to display the GIF
+        self.gif_label = tk.Label(root)
+        self.gif_label.pack()
+
+        # Start the animation
+        self.animate_gif()
+
+    def load_gif_frames(self, gif_path):
+        gif = Image.open(gif_path)
+        frames = [frame.copy() for frame in ImageSequence.Iterator(gif)]
+        return frames
+
+    def animate_gif(self):
+        if self.current_frame_index < len(self.gif_frames):
+            # Display the current frame
+            frame = self.gif_frames[self.current_frame_index]
+            self.current_frame_index += 1
+
+            # Convert the frame to PhotoImage format
+            tk_frame = ImageTk.PhotoImage(frame)
+
+            # Update the label with the new frame
+            self.gif_label.config(image=tk_frame)
+            self.gif_label.image = tk_frame
+
+            # Schedule the next frame
+            self.root.after(100, self.animate_gif)
+        else:
+            # Reset the animation
+            self.current_frame_index = 0
+            self.animate_gif()
+
+
+def main():
+    # Create the main root window
+    root = tk.Tk()
+
+    # Create a separate window for the Typing Effect App
+    message_queue = queue.Queue()
+    typing_app = TypingEffectApp(root, message_queue)
+
+    # Start the Typing Effect App in a separate thread
     threading.Thread(target=emotion_recognition_from_webcam, args=(message_queue,), daemon=True).start()
+
+    # Specify the path to your GIF
+    gif_path = 'avikapulges.gif'
+
+    # Create a separate window for the GIF Animation App
+    gif_window = tk.Toplevel(root)
+    gif_app = GifAnimationApp(gif_window, gif_path)
+
+    # Start the main Tkinter loop for the main root window
     root.mainloop()
 if __name__ == '__main__':
     display_qr_code('https://www.youtube.com/watch?v=n4zJBGjL7cI', 'phone.png')
